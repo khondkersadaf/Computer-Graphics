@@ -11,6 +11,9 @@ GLfloat body_speed = 0.0f;
 GLfloat bullet_speed = 0.0f;
 GLfloat bullet_position = 0.0f;
 
+GLfloat bullet_speed_x = 0.0f;
+GLfloat bullet_position_x = 0.0f;
+
 GLfloat left_enemy_position = 0.2f;
 GLfloat right_enemy_position = 0.4f;
 GLfloat center_enemy_position = 0.5f;
@@ -22,6 +25,11 @@ void update(int value) {
     position = -1.2f;
 
     position += body_speed;
+
+    if(bullet_position > 1.0)
+    bullet_position = 0.0f;
+
+    bullet_position += bullet_speed;
 
 	glutPostRedisplay();
 
@@ -114,11 +122,22 @@ glutPostRedisplay();
 case 'f':
 //if(bullet_position == position)
 //{
-      bullet_position += 0.1f;
-        if(bullet_position > 1.0)
-    bullet_position = 0.0f;
+      bullet_speed = 0.1f;
 
-    bullet_position += bullet_speed;
+
+	glutPostRedisplay();
+
+	        /*if(-0.01f < bullet_position_x > 0.01f)
+            {
+                    bullet_position_x = 0.0f;
+
+                    bullet_position_x += bullet_speed_x;
+	        }
+*/
+    if(bullet_position_x != position)
+    {
+       bullet_position_x == position;
+    }
 
 	glutPostRedisplay();
     break;
@@ -133,8 +152,8 @@ case 'f':
 void display() {
    glClear(GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
-
 glPushMatrix();
+        glPushMatrix();
 glTranslatef(position,0.0f, 0.0f);
 //body
    glBegin(GL_QUADS);
@@ -161,10 +180,11 @@ glTranslatef(position,0.0f, 0.0f);
       glVertex2f( 0.1f,  -0.95f);
       glVertex2f(0.15f,  -0.95f);
    glEnd();
-glPopMatrix();
+
 //bullet
-glPushMatrix();
+
 glTranslatef(0.0f,bullet_position, 0.0f);
+glTranslatef(bullet_position_x,0.0f, 0.0f);
    glBegin(GL_QUADS);
    glColor3f(0.0f, 0.0f, 1.0f);
    glVertex2f(-0.01f,-0.6f);
@@ -180,7 +200,8 @@ glTranslatef(0.0f,bullet_position, 0.0f);
    glVertex2f(0.0f, -0.56f);
    glVertex2f(-0.01f, -0.6f);
    glEnd();
-glPopMatrix();
+    glPopMatrix();
+
 
 //left enemy
 glPushMatrix();
@@ -192,6 +213,7 @@ glBegin(GL_TRIANGLES);
    glVertex2f(-0.5f, 0.9f);
    glEnd();
 glPopMatrix();
+
 
 //right enemy
 glPushMatrix();
