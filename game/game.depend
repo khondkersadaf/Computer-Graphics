@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1670312783 source:c:\users\administrator\desktop\game\main.cpp
+1670472942 source:c:\users\administrator\desktop\game\main.cpp
 	<cstdio>
 	<GL/gl.h>
 	<GL/glut.h>
